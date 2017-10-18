@@ -15,7 +15,7 @@ namespace CalculCaisse.Library
             Valeur = montant;
         }
 
-        public double Total(int nombre)
+        public double Total(double nombre)
         {
             double result = Valeur * nombre;
             return result;

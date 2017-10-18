@@ -13,9 +13,9 @@ namespace CalculCaisse.Forms
 {
     public partial class CalculForm : Form
     {
-        int nbB500, nbB200, nbB100, nbB50, nbB20, nbB10, nbB5;
-        int nbP2, nbP1, nbP050, nbP020, nbP010, nbP005, nbP002, nbP001;
-        int nbR2, nbR1, nbR050, nbR020, nbR010, nbR005, nbR002, nbR001;
+        double nbB500, nbB200, nbB100, nbB50, nbB20, nbB10, nbB5;
+        double nbP2, nbP1, nbP050, nbP020, nbP010, nbP005, nbP002, nbP001;
+        double nbR2, nbR1, nbR050, nbR020, nbR010, nbR005, nbR002, nbR001;
         double totalCoffre, totalEspeces, totalDepot, differenceCaisse;
 
         Monnaie B500 = new Monnaie(500);
@@ -49,6 +49,35 @@ namespace CalculCaisse.Forms
         }
 
         /// <summary>
+        /// Remplace la touche Enter par TAB et donc passe au champ suivant
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Enter))
+            {
+                SendKeys.Send("{TAB}");
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private Color CouleurCellDefaut()
+        {
+            Color color = new Color();
+            color = Color.FromArgb(255, 255, 192);
+            return color;
+        }
+
+        private Color CouleurCellErreur()
+        {
+            Color color = new Color();
+            color = Color.FromArgb(255, 0, 0);
+            return color;
+        }
+
+        /// <summary>
         /// Exécute l'ensemble des calculs.
         /// </summary>
         private void ExecuteCalculs()
@@ -71,11 +100,6 @@ namespace CalculCaisse.Forms
             txtDifference.Text = differenceCaisse.ToString("0.00");
         }
 
-        private void img_logo_Click(object sender, EventArgs e)
-        {
-            ExecuteCalculs();
-        }
-
         /// <summary>
         /// Exécute le calcul des billest
         /// </summary>
@@ -83,13 +107,13 @@ namespace CalculCaisse.Forms
         private double CalculBillets()
         {
             /* Récupération des données */
-            if (String.IsNullOrEmpty(txtB500.Text)) { nbB500 = 0; } else { nbB500 = int.Parse(txtB500.Text); ; }
-            if (String.IsNullOrEmpty(txtB200.Text)) { nbB200 = 0; } else { nbB200 = int.Parse(txtB200.Text); ; }
-            if (String.IsNullOrEmpty(txtB100.Text)) { nbB100 = 0; } else { nbB100 = int.Parse(txtB100.Text); ; }
-            if (String.IsNullOrEmpty(txtB50.Text)) { nbB50 = 0; } else { nbB50 = int.Parse(txtB50.Text); ; }
-            if (String.IsNullOrEmpty(txtB20.Text)) { nbB20 = 0; } else { nbB20 = int.Parse(txtB20.Text); ; }
-            if (String.IsNullOrEmpty(txtB10.Text)) { nbB10 = 0; } else { nbB10 = int.Parse(txtB10.Text); ; }
-            if (String.IsNullOrEmpty(txtB5.Text)) { nbB5 = 0; } else { nbB5 = int.Parse(txtB5.Text); ; }
+            if (String.IsNullOrEmpty(txtB500.Text)) { nbB500 = 0; } else { try { nbB500 = double.Parse(txtB500.Text); txtB500.BackColor = CouleurCellDefaut(); } catch { txtB500.BackColor = CouleurCellErreur(); }}
+            if (String.IsNullOrEmpty(txtB200.Text)) { nbB200 = 0; } else { try { nbB200 = double.Parse(txtB200.Text); txtB200.BackColor = CouleurCellDefaut(); } catch { txtB200.BackColor = CouleurCellErreur(); } }
+            if (String.IsNullOrEmpty(txtB100.Text)) { nbB100 = 0; } else { try { nbB100 = double.Parse(txtB100.Text); txtB100.BackColor = CouleurCellDefaut(); } catch { txtB100.BackColor = CouleurCellErreur(); } }
+            if (String.IsNullOrEmpty(txtB50.Text)) { nbB50 = 0; } else { nbB50 = double.Parse(txtB50.Text); }
+            if (String.IsNullOrEmpty(txtB20.Text)) { nbB20 = 0; } else { nbB20 = double.Parse(txtB20.Text); }
+            if (String.IsNullOrEmpty(txtB10.Text)) { nbB10 = 0; } else { nbB10 = double.Parse(txtB10.Text); }
+            if (String.IsNullOrEmpty(txtB5.Text)) { nbB5 = 0; } else { nbB5 = double.Parse(txtB5.Text); }
 
             /* Calcul */
             double totalB500 = B500.Total(nbB500);
@@ -121,14 +145,14 @@ namespace CalculCaisse.Forms
         private double CalculPieces()
         {
             /* Récupération des données */
-            if (String.IsNullOrEmpty(txtP2.Text)) { nbP2 = 0; } else { nbP2 = int.Parse(txtP2.Text); ; }
-            if (String.IsNullOrEmpty(txtP1.Text)) { nbP1 = 0; } else { nbP1 = int.Parse(txtP1.Text); ; }
-            if (String.IsNullOrEmpty(txtP050.Text)) { nbP050 = 0; } else { nbP050 = int.Parse(txtP050.Text); ; }
-            if (String.IsNullOrEmpty(txtP020.Text)) { nbP020 = 0; } else { nbP020 = int.Parse(txtP020.Text); ; }
-            if (String.IsNullOrEmpty(txtP010.Text)) { nbP010 = 0; } else { nbP010 = int.Parse(txtP010.Text); ; }
-            if (String.IsNullOrEmpty(txtP005.Text)) { nbP005 = 0; } else { nbP005 = int.Parse(txtP005.Text); ; }
-            if (String.IsNullOrEmpty(txtP002.Text)) { nbP002 = 0; } else { nbP002 = int.Parse(txtP002.Text); ; }
-            if (String.IsNullOrEmpty(txtP001.Text)) { nbP001 = 0; } else { nbP001 = int.Parse(txtP001.Text); ; }
+            if (String.IsNullOrEmpty(txtP2.Text)) { nbP2 = 0; } else { nbP2 = double.Parse(txtP2.Text); ; }
+            if (String.IsNullOrEmpty(txtP1.Text)) { nbP1 = 0; } else { nbP1 = double.Parse(txtP1.Text); ; }
+            if (String.IsNullOrEmpty(txtP050.Text)) { nbP050 = 0; } else { nbP050 = double.Parse(txtP050.Text); ; }
+            if (String.IsNullOrEmpty(txtP020.Text)) { nbP020 = 0; } else { nbP020 = double.Parse(txtP020.Text); ; }
+            if (String.IsNullOrEmpty(txtP010.Text)) { nbP010 = 0; } else { nbP010 = double.Parse(txtP010.Text); ; }
+            if (String.IsNullOrEmpty(txtP005.Text)) { nbP005 = 0; } else { nbP005 = double.Parse(txtP005.Text); ; }
+            if (String.IsNullOrEmpty(txtP002.Text)) { nbP002 = 0; } else { nbP002 = double.Parse(txtP002.Text); ; }
+            if (String.IsNullOrEmpty(txtP001.Text)) { nbP001 = 0; } else { nbP001 = double.Parse(txtP001.Text); ; }
 
             /* Calcul */
             double totalP2 = P2.Total(nbP2);
@@ -163,14 +187,14 @@ namespace CalculCaisse.Forms
         private double CalculRouleaux()
         {
             /* Récupération des données */
-            if (String.IsNullOrEmpty(txtR2.Text)) { nbR2 = 0; } else { nbR2 = int.Parse(txtR2.Text); ; }
-            if (String.IsNullOrEmpty(txtR1.Text)) { nbR1 = 0; } else { nbR1 = int.Parse(txtR1.Text); ; }
-            if (String.IsNullOrEmpty(txtR050.Text)) { nbR050 = 0; } else { nbR050 = int.Parse(txtR050.Text); ; }
-            if (String.IsNullOrEmpty(txtR020.Text)) { nbR020 = 0; } else { nbR020 = int.Parse(txtR020.Text); ; }
-            if (String.IsNullOrEmpty(txtR010.Text)) { nbR010 = 0; } else { nbR010 = int.Parse(txtR010.Text); ; }
-            if (String.IsNullOrEmpty(txtR005.Text)) { nbR005 = 0; } else { nbR005 = int.Parse(txtR005.Text); ; }
-            if (String.IsNullOrEmpty(txtR002.Text)) { nbR002 = 0; } else { nbR002 = int.Parse(txtR002.Text); ; }
-            if (String.IsNullOrEmpty(txtR001.Text)) { nbR001 = 0; } else { nbR001 = int.Parse(txtR001.Text); ; }
+            if (String.IsNullOrEmpty(txtR2.Text)) { nbR2 = 0; } else { nbR2 = double.Parse(txtR2.Text); ; }
+            if (String.IsNullOrEmpty(txtR1.Text)) { nbR1 = 0; } else { nbR1 = double.Parse(txtR1.Text); ; }
+            if (String.IsNullOrEmpty(txtR050.Text)) { nbR050 = 0; } else { nbR050 = double.Parse(txtR050.Text); ; }
+            if (String.IsNullOrEmpty(txtR020.Text)) { nbR020 = 0; } else { nbR020 = double.Parse(txtR020.Text); ; }
+            if (String.IsNullOrEmpty(txtR010.Text)) { nbR010 = 0; } else { nbR010 = double.Parse(txtR010.Text); ; }
+            if (String.IsNullOrEmpty(txtR005.Text)) { nbR005 = 0; } else { nbR005 = double.Parse(txtR005.Text); ; }
+            if (String.IsNullOrEmpty(txtR002.Text)) { nbR002 = 0; } else { nbR002 = double.Parse(txtR002.Text); ; }
+            if (String.IsNullOrEmpty(txtR001.Text)) { nbR001 = 0; } else { nbR001 = double.Parse(txtR001.Text); ; }
 
             /* Calcul */
             double totalR2 = R2.Total(nbR2);
@@ -196,6 +220,43 @@ namespace CalculCaisse.Forms
             txtTotalRouleaux.Text = totalRouleaux.ToString("0.00");
 
             return totalRouleaux;
+        }
+
+        /// <summary>
+        /// N'autorise que la saisie de chiffres.
+        /// </summary>
+        /// <param name="e"></param>
+        private void ChiffreOnly(KeyPressEventArgs e)
+        {
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
+        /// <summary>
+        /// N'autorise que la saisie de chiffre et du symbole décimal.
+        /// </summary>
+        /// <param name="e"></param>
+        private void ChiffreDecimalOnly(KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+                if (this.Text.Contains(e.KeyChar))
+                    e.Handled = true;
+            }
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0])
+                e.Handled = true;
+        }
+
+        private void CalculForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ChiffreDecimalOnly(e);
+        }
+
+        private void CalculForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            ExecuteCalculs();
         }
     }
 }

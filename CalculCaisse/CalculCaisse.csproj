@@ -54,11 +54,11 @@
     <Compile Include="Forms\CalculForm.Designer.cs">
       <DependentUpon>CalculForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\tmp.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\tmp.Designer.cs">
-      <DependentUpon>tmp.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\Monnaie.cs" />
     <Compile Include="Program.cs" />
@@ -66,8 +66,8 @@
     <EmbeddedResource Include="Forms\CalculForm.resx">
       <DependentUpon>CalculForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\tmp.resx">
-      <DependentUpon>tmp.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

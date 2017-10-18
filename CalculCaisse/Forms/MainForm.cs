@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace CalculCaisse.Forms
 {
-    public partial class tmp : Form
+    public partial class MainForm : Form
     {
-        public tmp()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            CalculForm frm = new CalculForm();
+            frm.MdiParent = this;
+            frm.Show();
         }
     }
 }

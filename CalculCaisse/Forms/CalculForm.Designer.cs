@@ -1569,7 +1569,6 @@
             this.imgLogo.Size = new System.Drawing.Size(428, 405);
             this.imgLogo.TabIndex = 40;
             this.imgLogo.TabStop = false;
-            this.imgLogo.Click += new System.EventHandler(this.img_logo_Click);
             // 
             // txtP1
             // 
@@ -2577,15 +2576,23 @@
             this.Controls.Add(this.grpRouleaux);
             this.Controls.Add(this.txt_DateTime);
             this.Controls.Add(this.lblTitre);
-            this.Controls.Add(this.menuCalcul);
             this.Controls.Add(this.grpDifference);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.imgLogo);
             this.Controls.Add(this.grpPièces);
             this.Controls.Add(this.grpBillets);
+            this.Controls.Add(this.menuCalcul);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CalculForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calcul";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CalculForm_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CalculForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.img_attention)).EndInit();
             this.grpDepotBanque.ResumeLayout(false);
             this.grpDepotBanque.PerformLayout();
